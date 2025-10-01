@@ -1,4 +1,3 @@
-import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Facebook, MessageCircle, Network, Heart } from "lucide-react";
 
@@ -12,65 +11,59 @@ export const Footer = () => {
   };
 
   return (
-    <footer className="mt-auto bg-gradient-to-r from-blue-600/90 to-green-600/90 text-white backdrop-blur-md">
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
-          {/* Logo and Title */}
-          <div className="text-center md:text-right">
-            <div className="flex items-center justify-center md:justify-start gap-3 mb-3">
-              <Network className="h-8 w-8 text-white animate-pulse" />
-              <h3 className="text-xl font-bold">نظام إدارة خطوط الإنترنت</h3>
-            </div>
-            <p className="text-blue-100 text-sm">
-              إدارة احترافية لخطوط الإنترنت والاشتراكات الشهرية
-            </p>
-          </div>
-
-          {/* Contact Developer */}
-          <div className="text-center">
-            <h4 className="text-lg font-semibold mb-4 flex items-center justify-center gap-2">
-              <Heart className="h-5 w-5 text-red-300 animate-pulse" />
-              للتواصل مع المطور
-            </h4>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Button
-                onClick={handleFacebookClick}
-                variant="outline"
-                className="bg-white/10 border-white/20 text-white hover:bg-white/20 hover:border-white/30 transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
-              >
-                <Facebook className="h-4 w-4 ml-2" />
-                فيسبوك
-              </Button>
-              <Button
-                onClick={handleWhatsAppClick}
-                variant="outline"
-                className="bg-white/10 border-white/20 text-white hover:bg-white/20 hover:border-white/30 transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
-              >
-                <MessageCircle className="h-4 w-4 ml-2" />
-                واتساب
-              </Button>
-            </div>
-          </div>
-
-          {/* Copyright */}
-          <div className="text-center md:text-left">
-            <div className="bg-white/10 rounded-lg p-4 backdrop-blur-sm">
-              <p className="text-sm text-blue-100 mb-2">
-                © 2025 جميع الحقوق محفوظة
-              </p>
-              <p className="text-xs text-blue-200">
-                تم التطوير بـ <Heart className="h-3 w-3 inline text-red-300" />{" "}
-                بواسطة المطور
+    <footer className="mt-auto w-full bg-gradient-to-b from-transparent to-[#1b1b1b]/90 backdrop-blur-sm border-t border-[#57AAB4]/20">
+      <div className="container mx-auto px-4 py-6">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="flex items-center gap-3 order-2 md:order-1">
+            <Network className="h-6 w-6 text-[#57AAB4]" style={{
+              filter: 'drop-shadow(0 0 8px rgba(87, 170, 180, 0.5))'
+            }} />
+            <div className="text-right">
+              <h3 className="text-base font-bold text-[#57AAB4]" style={{
+                textShadow: '0 0 10px rgba(87, 170, 180, 0.3)'
+              }}>
+                نظام إدارة خطوط الإنترنت
+              </h3>
+              <p className="text-xs text-gray-400">
+                إدارة احترافية وسهلة الاستخدام
               </p>
             </div>
           </div>
-        </div>
 
-        {/* Bottom Border */}
-        <div className="mt-8 pt-6 border-t border-white/20">
-          <div className="text-center">
-            <p className="text-sm text-blue-100">
-              نظام متطور لإدارة خطوط الإنترنت مع واجهة سهلة الاستخدام
+          <div className="flex items-center gap-3 order-1 md:order-2">
+            <span className="text-sm text-gray-400 hidden sm:inline">للتواصل:</span>
+            <Button
+              onClick={handleFacebookClick}
+              variant="outline"
+              size="sm"
+              className="bg-transparent border border-[#57AAB4]/30 text-[#57AAB4] hover:bg-[#57AAB4]/10 hover:border-[#57AAB4] transition-all duration-300"
+              style={{
+                boxShadow: '0 0 10px rgba(87, 170, 180, 0.1)'
+              }}
+            >
+              <Facebook className="h-4 w-4 ml-1" />
+              فيسبوك
+            </Button>
+            <Button
+              onClick={handleWhatsAppClick}
+              variant="outline"
+              size="sm"
+              className="bg-transparent border border-[#57AAB4]/30 text-[#57AAB4] hover:bg-[#57AAB4]/10 hover:border-[#57AAB4] transition-all duration-300"
+              style={{
+                boxShadow: '0 0 10px rgba(87, 170, 180, 0.1)'
+              }}
+            >
+              <MessageCircle className="h-4 w-4 ml-1" />
+              واتساب
+            </Button>
+          </div>
+
+          <div className="text-center md:text-left order-3">
+            <p className="text-xs text-gray-400 flex items-center gap-1">
+              © 2025 تم التطوير بـ
+              <Heart className="h-3 w-3 text-[#57AAB4]" style={{
+                filter: 'drop-shadow(0 0 5px rgba(87, 170, 180, 0.5))'
+              }} />
             </p>
           </div>
         </div>
