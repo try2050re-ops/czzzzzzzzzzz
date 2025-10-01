@@ -78,12 +78,18 @@ export const AdminDashboard = () => {
       {!showForm && !showBulkForm && !showBulkEditForm ? (
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-8">
           <div className="flex justify-center">
-            <TabsList className="grid w-full max-w-2xl grid-cols-2 animate-scale-in shadow-lg bg-white/80 backdrop-blur-sm">
-              <TabsTrigger value="dashboard" className="flex items-center gap-2 transition-all duration-300 hover:scale-105">
+            <TabsList className="grid w-full max-w-2xl grid-cols-2 animate-scale-in shadow-lg bg-gradient-to-br from-[#252525] to-[#1b1b1b] border border-[#57AAB4]/30 p-1">
+              <TabsTrigger
+                value="dashboard"
+                className="flex items-center gap-2 transition-all duration-300 data-[state=active]:bg-[#57AAB4] data-[state=active]:text-white text-gray-400 hover:text-[#57AAB4]"
+              >
                 <BarChart3 className="h-4 w-4" />
                 لوحة التحكم
               </TabsTrigger>
-              <TabsTrigger value="customers" className="flex items-center gap-2 transition-all duration-300 hover:scale-105">
+              <TabsTrigger
+                value="customers"
+                className="flex items-center gap-2 transition-all duration-300 data-[state=active]:bg-[#57AAB4] data-[state=active]:text-white text-gray-400 hover:text-[#57AAB4]"
+              >
                 <Users className="h-4 w-4" />
                 العملاء
               </TabsTrigger>
@@ -121,27 +127,29 @@ export const AdminDashboard = () => {
         />
       )}
 
-      {/* Floating Action Button for Mobile */}
       <div className="fixed bottom-6 right-6 md:hidden flex flex-col gap-2">
         <div className="flex flex-col gap-2">
           <Button
             onClick={handleBulkEdit}
             size="lg"
-            className="rounded-full h-14 w-14 shadow-lg hover-scale bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
+            className="rounded-full h-14 w-14 shadow-lg bg-gradient-to-r from-[#57AAB4] to-[#03a9f4] hover:from-[#03a9f4] hover:to-[#57AAB4] transition-all duration-300"
+            style={{ boxShadow: '0 0 20px rgba(87, 170, 180, 0.5)' }}
           >
             <Edit className="h-6 w-6" />
           </Button>
           <Button
             onClick={handleAddBulkCustomers}
             size="lg"
-            className="rounded-full h-14 w-14 shadow-lg hover-scale bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700"
+            className="rounded-full h-14 w-14 shadow-lg bg-gradient-to-r from-[#10b981] to-[#3b82f6] hover:from-[#3b82f6] hover:to-[#10b981] transition-all duration-300"
+            style={{ boxShadow: '0 0 20px rgba(16, 185, 129, 0.5)' }}
           >
             <UserPlus className="h-6 w-6" />
           </Button>
           <Button
             onClick={handleAddCustomer}
             size="lg"
-            className="rounded-full h-14 w-14 shadow-lg hover-scale animate-bounce bg-gradient-to-r from-blue-600 to-green-600 hover:from-blue-700 hover:to-green-700"
+            className="rounded-full h-14 w-14 shadow-lg animate-bounce bg-gradient-to-r from-[#57AAB4] to-[#10b981] hover:from-[#10b981] hover:to-[#57AAB4] transition-all duration-300"
+            style={{ boxShadow: '0 0 20px rgba(87, 170, 180, 0.5)' }}
           >
             <Plus className="h-6 w-6" />
           </Button>

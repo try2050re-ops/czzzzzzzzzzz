@@ -380,7 +380,7 @@ export const UserDashboard = ({ userType, username }: UserDashboardProps) => {
   return (
     <div className="space-y-6 animate-fade-in transition-all duration-500">
       <div className="text-center">
-        <h2 className="text-3xl font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-green-600">
+        <h2 className="text-4xl font-bold mb-2 text-[#57AAB4]" style={{ textShadow: '0 0 15px rgba(87, 170, 180, 0.5)' }}>
           مرحباً {getDisplayName()}
         </h2>
         
@@ -449,13 +449,19 @@ export const UserDashboard = ({ userType, username }: UserDashboardProps) => {
         </p>
       </div>
 
-      {/* Units Check Message for Single Users */}
       <div className="grid gap-6">
         {customers.map((customer, index) => (
-          <Card key={customer.id} className="animate-fade-in shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 border-l-4 border-l-blue-500 bg-black/80 text-white border-gray-600" style={{ animationDelay: `${index * 0.1}s` }}>
+          <Card
+            key={customer.id}
+            className="animate-fade-in shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 border-l-4 border-l-[#57AAB4] bg-gradient-to-br from-[#252525] to-[#1b1b1b] text-white border border-[#57AAB4]/30"
+            style={{
+              animationDelay: `${index * 0.1}s`,
+              boxShadow: '0 0 20px rgba(87, 170, 180, 0.2)'
+            }}
+          >
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Wifi className="h-5 w-5 text-blue-600" />
+              <CardTitle className="flex items-center gap-2 text-[#57AAB4]">
+                <Wifi className="h-5 w-5 text-[#57AAB4]" style={{ filter: 'drop-shadow(0 0 5px rgba(87, 170, 180, 0.5))' }} />
                 {userType === "multiple" ? `بيانات الخط - ${customer.customer_name}` : "بيانات الخط"}
                 {userType === "multiple" && (
                   <Dialog open={dialogOpen && editingSuggestedName?.id === customer.id} onOpenChange={setDialogOpen}>
@@ -549,35 +555,35 @@ export const UserDashboard = ({ userType, username }: UserDashboardProps) => {
                 </div>
               )}
               
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4 bg-gray-800/50 rounded-lg">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4 bg-[#1b1b1b]/50 rounded-lg border border-[#57AAB4]/20">
                 <div className="flex items-center gap-2">
-                  <Phone className="h-4 w-4 text-gray-300" />
-                  <span className="font-medium">رقم الموبايل:</span>
-                  <span className="text-blue-600 font-semibold">{customer.mobile_number}</span>
+                  <Phone className="h-4 w-4 text-[#57AAB4]" />
+                  <span className="font-medium text-gray-300">رقم الموبايل:</span>
+                  <span className="text-[#57AAB4] font-semibold">{customer.mobile_number}</span>
                 </div>
-                
+
                 <div className="flex items-center gap-2">
-                  <Wifi className="h-4 w-4 text-gray-300" />
-                  <span className="font-medium">نوع الخط:</span>
-                  <Badge variant="outline" className="bg-green-800 text-green-300 border-green-600">{customer.line_type} جيجا</Badge>
+                  <Wifi className="h-4 w-4 text-[#10b981]" />
+                  <span className="font-medium text-gray-300">نوع الخط:</span>
+                  <Badge variant="outline" className="bg-[#10b981]/20 text-[#10b981] border-[#10b981]">{customer.line_type} جيجا</Badge>
                 </div>
-                
+
                 <div className="flex items-center gap-2">
-                  <Calendar className="h-4 w-4 text-gray-300" />
-                  <span className="font-medium">تاريخ الشحن:</span>
-                  <span className="text-purple-600 font-semibold">{formatDate(customer.charging_date)}</span>
+                  <Calendar className="h-4 w-4 text-[#3b82f6]" />
+                  <span className="font-medium text-gray-300">تاريخ الشحن:</span>
+                  <span className="text-[#3b82f6] font-semibold">{formatDate(customer.charging_date)}</span>
                 </div>
-                
+
                 <div className="flex items-center gap-2">
-                  <Wifi className="h-4 w-4 text-gray-300" />
-                  <span className="font-medium">مزود الخدمة:</span>
-                  <Badge variant="outline" className="bg-blue-800 text-blue-300 border-blue-600 capitalize">{customer.provider || 'غير محدد'}</Badge>
+                  <Wifi className="h-4 w-4 text-[#57AAB4]" />
+                  <span className="font-medium text-gray-300">مزود الخدمة:</span>
+                  <Badge variant="outline" className="bg-[#57AAB4]/20 text-[#57AAB4] border-[#57AAB4] capitalize">{customer.provider || 'غير محدد'}</Badge>
                 </div>
-                
+
                 <div className="flex items-center gap-2">
-                  <Calendar className="h-4 w-4 text-gray-300" />
-                  <span className="font-medium">تاريخ التجديد:</span>
-                  <span className="text-orange-600 font-semibold">{formatRenewalWithProvider(customer.charging_date, null, customer.provider)}</span>
+                  <Calendar className="h-4 w-4 text-[#f59e0b]" />
+                  <span className="font-medium text-gray-300">تاريخ التجديد:</span>
+                  <span className="text-[#f59e0b] font-semibold">{formatRenewalWithProvider(customer.charging_date, null, customer.provider)}</span>
                 </div>
               </div>
 

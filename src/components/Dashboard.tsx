@@ -8,6 +8,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
+import "./Dashboard.css";
 
 interface DashboardStats {
   totalCustomers: number;
@@ -177,21 +178,24 @@ export const Dashboard = () => {
     }
   };
 
-  const StatCard = ({ title, value, icon: Icon, className = "" }: {
+  const StatCard = ({ title, value, icon: Icon, iconColor, borderColor }: {
     title: string;
     value: string | number;
     icon: any;
-    className?: string;
+    iconColor: string;
+    borderColor: string;
   }) => (
-    <Card className={`hover-scale transition-all duration-300 ${className}`}>
+    <Card className="stat-card hover-lift bg-gradient-to-br from-[#252525] to-[#1b1b1b] border-2" style={{ borderColor }}>
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-        <CardTitle className="text-sm font-medium text-muted-foreground">
+        <CardTitle className="text-sm font-medium text-[#57AAB4]">
           {title}
         </CardTitle>
-        <Icon className="h-5 w-5 text-muted-foreground" />
+        <Icon className="h-6 w-6" style={{ color: iconColor, filter: `drop-shadow(0 0 8px ${iconColor})` }} />
       </CardHeader>
       <CardContent>
-        <div className="text-2xl font-bold">{value}</div>
+        <div className="text-3xl font-bold glow-text" style={{ color: iconColor }}>
+          {value}
+        </div>
       </CardContent>
     </Card>
   );
@@ -215,86 +219,101 @@ export const Dashboard = () => {
 
   return (
     <div className="space-y-6 animate-fade-in">
-      <h2 className="text-3xl font-bold text-center mb-8">لوحة التحكم</h2>
-      
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+      <h2 className="text-4xl font-bold text-center mb-8 text-[#57AAB4] glow-text">
+        لوحة التحكم
+      </h2>
+
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
         <StatCard
           title="إجمالي العملاء"
           value={stats.totalCustomers}
           icon={Users}
-          className="animate-fade-in bg-black/80 text-white border-gray-600"
+          iconColor="#57AAB4"
+          borderColor="rgba(87, 170, 180, 0.3)"
         />
         <StatCard
           title="العملاء المدفوعون"
           value={stats.paidCustomers}
           icon={CheckCircle}
-          className="animate-fade-in bg-black/80 text-white border-green-600"
+          iconColor="#10b981"
+          borderColor="rgba(16, 185, 129, 0.3)"
         />
         <StatCard
           title="التجديدات المكتملة"
           value={stats.renewedCustomers}
           icon={AlertCircle}
-          className="animate-fade-in bg-black/80 text-white border-blue-600"
+          iconColor="#3b82f6"
+          borderColor="rgba(59, 130, 246, 0.3)"
         />
         <StatCard
           title="إجمالي الإيرادات"
           value={`${stats.totalRevenue.toLocaleString()} جنيه`}
           icon={DollarSign}
-          className="animate-fade-in bg-black/80 text-white border-yellow-600"
+          iconColor="#f59e0b"
+          borderColor="rgba(245, 158, 11, 0.3)"
         />
       </div>
 
-      {/* ملاحظات المدير */}
-      <Card className="animate-scale-in bg-black/80 text-white border-gray-600">
+      <Card className="animate-scale-in glass-effect bg-gradient-to-br from-[#252525] to-[#1b1b1b] border-2 border-[#57AAB4]/30">
         <CardHeader>
-          <CardTitle className="flex items-center justify-between cursor-pointer" onClick={() => setShowNotes(!showNotes)}>
-            <span>ملاحظات المدير ({adminNotes.length})</span>
-            {showNotes ? <ChevronUp className="h-5 w-5" /> : <ChevronDown className="h-5 w-5" />}
+          <CardTitle
+            className="flex items-center justify-between cursor-pointer text-[#57AAB4] hover:text-[#57AAB4]/80 transition-colors"
+            onClick={() => setShowNotes(!showNotes)}
+          >
+            <span className="glow-text">ملاحظات المدير ({adminNotes.length})</span>
+            {showNotes ? (
+              <ChevronUp className="h-5 w-5" style={{ filter: 'drop-shadow(0 0 5px rgba(87, 170, 180, 0.5))' }} />
+            ) : (
+              <ChevronDown className="h-5 w-5" style={{ filter: 'drop-shadow(0 0 5px rgba(87, 170, 180, 0.5))' }} />
+            )}
           </CardTitle>
         </CardHeader>
         {showNotes && (
         <CardContent className="space-y-4">
-          {/* إضافة ملاحظة جديدة */}
           <div className="space-y-2">
-            <Label htmlFor="new-note">إضافة ملاحظة جديدة</Label>
+            <Label htmlFor="new-note" className="text-[#57AAB4]">إضافة ملاحظة جديدة</Label>
             <div className="flex gap-2">
               <Textarea
                 id="new-note"
                 value={newNote}
                 onChange={(e) => setNewNote(e.target.value)}
                 placeholder="اكتب ملاحظتك هنا..."
-                className="flex-1 text-right bg-gray-800/50 border-gray-600 text-white placeholder:text-gray-400"
+                className="flex-1 text-right bg-[#1b1b1b]/50 border-[#57AAB4]/30 text-white placeholder:text-gray-500 focus:border-[#57AAB4] transition-colors"
                 rows={3}
               />
               <Button
                 onClick={addNote}
                 disabled={savingNote || !newNote.trim()}
-                className="hover-scale bg-gradient-to-r from-blue-600 to-green-600 hover:from-blue-700 hover:to-green-700"
+                className="bg-gradient-to-r from-[#57AAB4] to-[#03a9f4] hover:from-[#03a9f4] hover:to-[#57AAB4] transition-all duration-300"
+                style={{ boxShadow: '0 0 15px rgba(87, 170, 180, 0.3)' }}
               >
                 <Plus className="h-4 w-4" />
               </Button>
             </div>
           </div>
 
-          {/* عرض الملاحظات */}
           <div className="space-y-3">
-            <h4 className="font-semibold text-lg">الملاحظات المحفوظة</h4>
+            <h4 className="font-semibold text-lg text-[#57AAB4]">الملاحظات المحفوظة</h4>
             {loadingNotes ? (
               <div className="text-center py-4">
-                <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-white mx-auto"></div>
+                <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-[#57AAB4] mx-auto"></div>
               </div>
             ) : adminNotes.length === 0 ? (
-              <p className="text-gray-400 text-center py-4">لا توجد ملاحظات محفوظة</p>
+              <p className="text-gray-500 text-center py-4">لا توجد ملاحظات محفوظة</p>
             ) : (
-              adminNotes.map((note) => (
-                <Card key={note.id} className="bg-gray-800/50 border-gray-600">
+              adminNotes.map((note, index) => (
+                <Card
+                  key={note.id}
+                  className="animate-slide-in-right bg-[#1b1b1b]/70 border border-[#57AAB4]/20 hover:border-[#57AAB4]/40 transition-all duration-300"
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                >
                   <CardContent className="p-4">
                     {editingNote?.id === note.id ? (
                       <div className="space-y-2">
                         <Textarea
                           value={editingNote.content}
                           onChange={(e) => setEditingNote({ ...editingNote, content: e.target.value })}
-                          className="bg-gray-700/50 border-gray-500 text-white text-right"
+                          className="bg-[#1b1b1b] border-[#57AAB4]/30 text-white text-right focus:border-[#57AAB4]"
                           rows={3}
                         />
                         <div className="flex gap-2 justify-end">
@@ -302,7 +321,7 @@ export const Dashboard = () => {
                             variant="ghost"
                             size="sm"
                             onClick={() => setEditingNote(null)}
-                            className="text-gray-400 hover:text-gray-300"
+                            className="text-gray-400 hover:text-gray-300 hover:bg-gray-800"
                           >
                             إلغاء
                           </Button>
@@ -310,7 +329,7 @@ export const Dashboard = () => {
                             variant="ghost"
                             size="sm"
                             onClick={() => updateNote(note.id, editingNote.content)}
-                            className="text-green-400 hover:text-green-300"
+                            className="text-[#10b981] hover:text-[#10b981]/80 hover:bg-[#10b981]/10"
                           >
                             حفظ
                           </Button>
@@ -320,7 +339,7 @@ export const Dashboard = () => {
                       <div className="flex justify-between items-start gap-3">
                         <div className="flex-1">
                           <p className="text-white text-right mb-2">{note.note_content}</p>
-                          <p className="text-xs text-gray-400">
+                          <p className="text-xs text-[#57AAB4]/60">
                             {new Date(note.created_at).toLocaleDateString('ar-EG', {
                               year: 'numeric',
                               month: 'long',
@@ -335,7 +354,7 @@ export const Dashboard = () => {
                             variant="ghost"
                             size="sm"
                             onClick={() => setEditingNote({ id: note.id, content: note.note_content })}
-                            className="text-blue-400 hover:text-blue-300 hover:bg-blue-900/20"
+                            className="text-[#3b82f6] hover:text-[#3b82f6]/80 hover:bg-[#3b82f6]/10 transition-all"
                           >
                             <Edit className="h-4 w-4" />
                           </Button>
@@ -345,23 +364,23 @@ export const Dashboard = () => {
                                 variant="ghost"
                                 size="sm"
                                 onClick={() => setDeleteNoteId(note.id)}
-                                className="text-red-400 hover:text-red-300 hover:bg-red-900/20"
+                                className="text-red-400 hover:text-red-300 hover:bg-red-900/20 transition-all"
                               >
                                 <Trash2 className="h-4 w-4" />
                               </Button>
                             </AlertDialogTrigger>
-                            <AlertDialogContent>
+                            <AlertDialogContent className="bg-[#1b1b1b] border-[#57AAB4]/30">
                               <AlertDialogHeader>
-                                <AlertDialogTitle>حذف الملاحظة</AlertDialogTitle>
-                                <AlertDialogDescription className="text-right">
+                                <AlertDialogTitle className="text-[#57AAB4]">حذف الملاحظة</AlertDialogTitle>
+                                <AlertDialogDescription className="text-right text-gray-400">
                                   هل أنت متأكد من حذف هذه الملاحظة؟ لا يمكن التراجع عن هذا الإجراء.
                                 </AlertDialogDescription>
                               </AlertDialogHeader>
                               <AlertDialogFooter>
-                                <AlertDialogCancel>إلغاء</AlertDialogCancel>
+                                <AlertDialogCancel className="bg-gray-800 text-white hover:bg-gray-700">إلغاء</AlertDialogCancel>
                                 <AlertDialogAction
                                   onClick={() => deleteNote(note.id)}
-                                  className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                                  className="bg-red-600 text-white hover:bg-red-700"
                                 >
                                   حذف
                                 </AlertDialogAction>
@@ -381,39 +400,39 @@ export const Dashboard = () => {
       </Card>
 
       <div className="grid gap-6 md:grid-cols-2">
-        <Card className="animate-scale-in bg-black/80 text-white border-gray-600">
+        <Card className="animate-scale-in stat-card hover-lift bg-gradient-to-br from-[#252525] to-[#1b1b1b] border-2 border-[#10b981]/30">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <CheckCircle className="h-5 w-5 text-green-500" />
+            <CardTitle className="flex items-center gap-2 text-[#57AAB4]">
+              <CheckCircle className="h-5 w-5 text-[#10b981]" style={{ filter: 'drop-shadow(0 0 8px #10b981)' }} />
               معدل الدفع
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold text-green-600">
-              {stats.totalCustomers > 0 
+            <div className="text-4xl font-bold text-[#10b981] glow-text">
+              {stats.totalCustomers > 0
                 ? Math.round((stats.paidCustomers / stats.totalCustomers) * 100)
                 : 0}%
             </div>
-            <p className="text-sm text-gray-300">
+            <p className="text-sm text-gray-400 mt-2">
               {stats.paidCustomers} من {stats.totalCustomers} عميل دفعوا
             </p>
           </CardContent>
         </Card>
 
-        <Card className="animate-scale-in bg-black/80 text-white border-gray-600">
+        <Card className="animate-scale-in stat-card hover-lift bg-gradient-to-br from-[#252525] to-[#1b1b1b] border-2 border-[#3b82f6]/30">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <AlertCircle className="h-5 w-5 text-blue-500" />
+            <CardTitle className="flex items-center gap-2 text-[#57AAB4]">
+              <AlertCircle className="h-5 w-5 text-[#3b82f6]" style={{ filter: 'drop-shadow(0 0 8px #3b82f6)' }} />
               معدل التجديد
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold text-blue-600">
-              {stats.totalCustomers > 0 
+            <div className="text-4xl font-bold text-[#3b82f6] glow-text">
+              {stats.totalCustomers > 0
                 ? Math.round((stats.renewedCustomers / stats.totalCustomers) * 100)
                 : 0}%
             </div>
-            <p className="text-sm text-gray-300">
+            <p className="text-sm text-gray-400 mt-2">
               {stats.renewedCustomers} من {stats.totalCustomers} عميل جددوا
             </p>
           </CardContent>
