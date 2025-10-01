@@ -6,7 +6,7 @@ import { BulkCustomerForm } from "@/components/BulkCustomerForm";
 import { BulkEditForm } from "@/components/BulkEditForm";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { BarChart3, Users, Plus, UserPlus, Edit } from "lucide-react";
+import { ChartBar as BarChart3, Users, Plus, UserPlus, CreditCard as Edit } from "lucide-react";
 
 interface Customer {
   id: number;
